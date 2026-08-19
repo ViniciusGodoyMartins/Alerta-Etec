@@ -1,0 +1,11 @@
+----------------------------CONFIGURAÇÃO DO GIT----------------------------
+git config --global user.name Vinicius
+git config --global user.email viniciusgodoy.martins@gmail.com
+
+
+--------------------CRIAR UM PROJETO REACT NATIVE EXPO---------------------
+npx create-expo-app@latest AlertaEtec --template blank-typescript@sdk-57
+
+cd AlertaEtec
+
+npm i
