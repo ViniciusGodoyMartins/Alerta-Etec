@@ -27,3 +27,38 @@ export function formatPhone(value: string) {
 export function isValidBrazilianPhone(value: string) {
     return [10, 11].includes(onlyDigits(value).length);
 }
+
+
+export function buildMessage(
+    name: string,
+    Occurrence: Occurrence,
+    note: string,
+) {
+    const student = name.trim()|| 'Estudante';
+    const messages: Record<Occurrence, string> = {
+        'Atraso no tranporte':
+        `Olá, sou o ${student}, estudante da ETEC. ` +
+        'Meu transporte apresentou um imprevisto e poderei chegar atrasado.',
+
+        'Problema no trajeto':
+        `Olá, sou o ${student}, estudante da ETEC.` +
+        'Tive um problema no trajeto e gostaria de avisar.',
+
+        'Consulta médica':
+        `Olá, sou o ${student}, estudante da ETEC.` +
+        'Não irei comparecer a aula hoje, pois estou em consulta médica',
+
+        'Problemas pessoais':`Olá, sou o ${student}, estudante da ETEC.` +
+        'Não irei comparecer a aula hoje, devido a problemas pessoais.',
+
+        'Outro': `Olá, sou o ${student}, estudante da ETEC.` +
+        'Gostaria de comunicar uma ocorrência',       
+    };
+
+    return messages[Occurrence] + (note.trim() ? `Observação: ${note.trim()}` : '');
+}
+
+export function smsUrl(phone: string, message: string) {
+    const separator = Platform.OS === 'ios' ? '&' : '?';
+    return `sms:${onlyDigits(phone)}${separator}body=${encodeURIComponent(message)}`;
+}
