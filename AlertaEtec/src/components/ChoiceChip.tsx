@@ -2,17 +2,40 @@ import React from 'react'
 import { StyleSheet, Text, Pressable } from 'react-native'
 
 type Props = {
-    label: string;
-    selected: boolean;
-    onPress: () => void;
+  label: string;
+  selected: boolean;
+  onPress: () => void;
 }
 
-export default function ChoiceChip({ label, selected, onPress }: Props) {
+export function ChoiceChip({ label, selected, onPress }: Props) {
   return (
-    <Pressable>
-      <Text>ChoiceChip</Text>
+    <Pressable
+    accessibilityRole="button"
+    accessibilityState={{ selected }}
+    onPress={onPress}
+    style={[styles.chip, selected && styles.selected]}>
+
+      <Text style={[styles.text, selected && styles.selectedText]}>
+        {label}
+      </Text>
     </Pressable>
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  chip: {
+    borderWidth: 1,
+    borderColor: '#CBD5E1',
+    borderRadius: 999,
+    paddingVertical: 9,
+    paddingHorizontal: 13,
+  }, selected: {
+    backgroundColor: '#E0F2FE',
+    borderColor: '#0284C7',
+  }, text: {
+    color: '#475569',
+    fontWeight: '700',
+  }, selectedText: {
+    color: '#075985',
+  }, 
+})
